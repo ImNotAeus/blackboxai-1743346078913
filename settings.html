@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+  <script src="scripts/auth.js"></script>
+  <script>checkAuth();</script>
+
+  <div class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        <h1 class="text-xl font-bold text-red-600">Emergency Response System</h1>
+        <div class="flex items-center space-x-4">
+          <span class="text-sm text-gray-600">Welcome, <span id="userName" class="font-medium"></span></span>
+          <button onclick="logout()" class="text-sm text-red-600 hover:text-red-800">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+      <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Settings</h2>
+        
+        <div class="bg-white shadow rounded-lg overflow-hidden mb-6">
+          <div class="p-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-4 border-b pb-2">Language Preferences</h3>
+            <div class="space-y-4">
+              <div>
+                <label for="language" class="block text-sm font-medium text-gray-700">App Language</label>
+                <select id="language" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500">
+                  <option value="en" selected>English</option>
+                  <option value="es">Español (Spanish)</option>
+                  <option value="fr">Français (French)</option>
+                  <option value="de">Deutsch (German)</option>
+                  <option value="zh">中文 (Chinese)</option>
+                  <option value="ar">العربية (Arabic)</option>
+                </select>
+              </div>
+              <div class="flex items-center">
+                <input type="checkbox" id="autoTranslate" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                <label for="autoTranslate" class="ml-2 block text-sm text-gray-700">
+                  Automatically translate emergency alerts
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white shadow rounded-lg overflow-hidden mb-6">
+          <div class="p-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-4 border-b pb-2">Geo-Fencing &amp; Safe Zones</h3>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Your Safe Zones</label>
+                <div class="mt-2 space-y-2" id="safeZonesList">
+                  <div class="flex justify-between items-center p-3 border rounded-lg">
+                    <div>
+                      <h4 class="font-medium">Home</h4>
+                      <p class="text-sm text-gray-600">1.5 mile radius</p>
+                    </div>
+                    <div>
+                      <button class="text-blue-600 hover:text-blue-800 mr-3">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="text-red-600 hover:text-red-800">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center p-3 border rounded-lg">
+                    <div>
+                      <h4 class="font-medium">Workplace</h4>
+                      <p class="text-sm text-gray-600">1 mile radius</p>
+                    </div>
+                    <div>
+                      <button class="text-blue-600 hover:text-blue-800 mr-3">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="text-red-600 hover:text-red-800">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button id="addSafeZoneBtn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                  <i class="fas fa-plus mr-2"></i> Add Safe Zone
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white shadow rounded-lg overflow-hidden mb-6">
+          <div class="p-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-4 border-b pb-2">Notification Preferences</h3>
+            <div class="space-y-4">
+              <div class="flex items-center">
+                <input type="checkbox" id="emergencyAlerts" checked class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                <label for="emergencyAlerts" class="ml-2 block text-sm text-gray-700">
+                  Emergency alerts
+                </label>
+              </div>
+              <div class="flex items-center">
+                <input type="checkbox" id="communityAlerts" checked class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                <label for="communityAlerts" class="ml-2 block text-sm text-gray-700">
+                  Community alerts
+                </label>
+              </div>
+              <div class="flex items-center">
+                <input type="checkbox" id="locationAlerts" checked class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                <label for="locationAlerts" class="ml-2 block text-sm text-gray-700">
+                  Location-based alerts
+                </label>
+              </div>
+              <div class="flex items-center">
+                <input type="checkbox" id="soundAlerts" checked class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                <label for="soundAlerts" class="ml-2 block text-sm text-gray-700">
+                  Sound alerts for emergencies
+                </label>
+              </div>
+              <div class="flex items-center">
+                <input type="checkbox" id="vibrationAlerts" checked class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                <label for="vibrationAlerts" class="ml-2 block text-sm text-gray-700">
+                  Vibration alerts for emergencies
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+          <div class="p-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-4 border-b pb-2">Account Settings</h3>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Two-Factor Authentication</label>
+                <div class="mt-2 flex items-center">
+                  <span class="relative inline-block h-4 w-7 rounded-full bg-gray-200">
+                    <input type="checkbox" id="twoFactorAuth" class="absolute h-4 w-7 rounded-full opacity-0">
+                    <span class="absolute left-0 top-0 h-4 w-4 rounded-full bg-white border border-gray-300 transition-transform duration-200 ease-in-out"></span>
+                  </span>
+                  <label for="twoFactorAuth" class="ml-2 block text-sm text-gray-700">
+                    Enabled
+                  </label>
+                </div>
+              </div>
+              <div>
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+                  Change Password
+                </button>
+              </div>
+              <div>
+                <button class="px-4 py-2 bg-red-100 text-red-700 rounded hover:bg-red-200">
+                  Delete Account
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+        <p>Emergency Response System © 2023. For emergency, call 911.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Add Safe Zone Modal -->
+  <div id="safeZoneModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full">
+      <h3 class="text-lg font-medium text-gray-900 mb-4">Add Safe Zone</h3>
+      <form id="safeZoneForm">
+        <div class="space-y-4">
+          <div>
+            <label for="zoneName" class="block text-sm font-medium text-gray-700">Zone Name</label>
+            <input type="text" id="zoneName" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500" placeholder="e.g., Home, Workplace">
+          </div>
+          <div>
+            <label for="zoneAddress" class="block text-sm font-medium text-gray-700">Address</label>
+            <input type="text" id="zoneAddress" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500" placeholder="Enter address">
+          </div>
+          <div>
+            <label for="zoneRadius" class="block text-sm font-medium text-gray-700">Radius</label>
+            <select id="zoneRadius" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500">
+              <option value="0.5">0.5 miles</option>
+              <option value="1" selected>1 mile</option>
+              <option value="1.5">1.5 miles</option>
+              <option value="2">2 miles</option>
+              <option value="3">3 miles</option>
+            </select>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" id="notifyExit" checked class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+            <label for="notifyExit" class="ml-2 block text-sm text-gray-700">
+              Notify when leaving this zone
+            </label>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" id="notifyEnter" checked class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+            <label for="notifyEnter" class="ml-2 block text-sm text-gray-700">
+              Notify when entering this zone
+            </label>
+          </div>
+        </div>
+        <div class="mt-6 flex justify-end space-x-3">
+          <button type="button" id="cancelSafeZone" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save Zone</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Set current user name
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    document.getElementById('userName').textContent = currentUser?.name || 'User';
+
+    // DOM elements
+    const safeZoneModal = document.getElementById('safeZoneModal');
+    const addSafeZoneBtn = document.getElementById('addSafeZoneBtn');
+    const cancelSafeZone = document.getElementById('cancelSafeZone');
+    const safeZoneForm = document.getElementById('safeZoneForm');
+
+    // Open safe zone modal
+    addSafeZoneBtn.addEventListener('click', () => {
+      safeZoneModal.classList.remove('hidden');
+    });
+
+    // Close safe zone modal
+    cancelSafeZone.addEventListener('click', () => {
+      safeZoneModal.classList.add('hidden');
+    });
+
+    // Handle safe zone form submission
+    safeZoneForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // In a real app, this would save to your backend
+      alert('Safe zone added successfully!');
+      safeZoneModal.classList.add('hidden');
+      safeZoneForm.reset();
+    });
+
+    // Load saved settings
+    document.addEventListener('DOMContentLoaded', function() {
+      const settings = JSON.parse(localStorage.getItem('settings')) || {};
+      
+      // Set language preference
+      if (settings.language) {
+        document.getElementById('language').value = settings.language;
+      }
+      
+      // Set other preferences
+      if (settings.autoTranslate !== undefined) {
+        document.getElementById('autoTranslate').checked = settings.autoTranslate;
+      }
+      // Add more settings loading as needed
+    });
+
+    // Save settings when changed
+    document.getElementById('language').addEventListener('change', function() {
+      const settings = JSON.parse(localStorage.getItem('settings')) || {};
+      settings.language = this.value;
+      localStorage.setItem('settings', JSON.stringify(settings));
+    });
+
+    document.getElementById('autoTranslate').addEventListener('change', function() {
+      const settings = JSON.parse(localStorage.getItem('settings')) || {};
+      settings.autoTranslate = this.checked;
+      localStorage.setItem('settings', JSON.stringify(settings));
+    });
+  </script>
+</body>
+</html>
