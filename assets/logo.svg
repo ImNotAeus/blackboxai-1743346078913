@@ -1,0 +1,5 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="40" rx="8" fill="#EF4444"/>
+  <path d="M20 10L30 30M30 30L40 10M30 30H50M70 10V30M70 10H80V30H70M90 10V30M90 10H100V30H90" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <text x="110" y="25" font-family="Arial" font-size="16" font-weight="bold" text-anchor="end" fill="white">RESCUE</text>
+</svg>
