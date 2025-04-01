@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Emergency Response System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+  <script src="scripts/auth.js"></script>
+  <script src="scripts/admin-confirmations.js"></script>
+  <script>checkAuth();</script>
+
+  <!-- Copy the entire body content from the original admin-dashboard.html -->
+  <div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <div class="bg-gray-800 text-white w-64 flex-shrink-0">
+      <!-- ... existing sidebar content ... -->
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col">
+      <!-- Header -->
+      <header class="bg-white shadow-sm">
+        <!-- ... existing header content ... -->
+      </header>
+
+      <!-- Dashboard Content -->
+      <main class="flex-1 p-6">
+        <!-- ... existing dashboard content ... -->
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Copy all JavaScript from original file
+    // Add the confirmation functions if not present
+    function confirmLogout() {
+      if (confirm('Are you sure you want to logout?')) {
+        logout();
+      }
+    }
+
+    function confirmUserDelete(userId) {
+      if (confirm('WARNING: This will permanently delete the user. Continue?')) {
+        // Actual delete logic would go here
+      }
+    }
+
+    function confirmAlertResolution(alertId) {
+      if (confirm('Are you sure you want to mark this alert as resolved?')) {
+        // Actual resolve logic would go here
+      }
+    }
+  </script>
+</body>
+</html>
