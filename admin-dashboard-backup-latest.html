@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Emergency Response System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+  <script src="scripts/auth-enhanced.js"></script>
+  <script>
+    // Confirmation Dialog Functions
+    function confirmAction(message, callback) {
+      if (confirm(message)) {
+        callback();
+      }
+    }
+
+    function confirmLogout() {
+      confirmAction('Are you sure you want to logout? All unsaved changes will be lost.', logout);
+    }
+
+    function confirmUserDelete(userId) {
+      confirmAction('WARNING: This will permanently delete user '+userId+'. Continue?', 
+        () => { /* delete user logic */ });
+    }
+
+    function confirmAlertResolution(alertId) {
+      confirmAction('Mark alert '+alertId+' as resolved? Please verify emergency was handled.',
+        () => { /* resolve alert logic */ });
+    }
+
+    function confirmSettingsSave() {
+      confirmAction('Save these settings? This will affect all users.',
+        () => { /* save settings logic */ });
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Attach confirmations to all relevant buttons
+      document.querySelectorAll('[data-confirm]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          if (!confirm(this.dataset.confirm)) {
+            e.preventDefault();
+          }
+        });
+      });
+      
+      checkAuth();
+      // Original dashboard initialization code...
+    });
+  </script>
+
+  <!-- Rest of the admin dashboard HTML content -->
+  <div class="min-h-screen flex">
+    <!-- Sidebar and main content from original file -->
+  </div>
+</body>
+</html>
